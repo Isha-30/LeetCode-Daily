@@ -1,0 +1,27 @@
+class Solution {
+    public int nthMagicalNumber(int n, int a, int b) {
+        int mod = (int)Math.pow(10, 9)+7;
+        long l = 0;
+        long r = (long)n * Math.min(a, b);
+        int gcd = findGCD(a, b);
+        int lcm = a*b/gcd;
+        while ( l<r ) {
+            long mid = (l+r)/2;
+            if ( mid/a + mid/b - mid/lcm<n ) {
+                l = mid + 1;
+            } else {
+                r = mid;
+            }
+        }
+        return (int)(l%mod);
+    }
+    public int findGCD( int a, int b ) {
+        int tmp;
+        while (b > 0) {
+            tmp = a;
+            a = b;
+            b = tmp % b;
+        }
+        return a;
+    }
+}
