@@ -1,0 +1,32 @@
+class Solution {
+    public String addBinary(String a, String b) {
+        boolean carry = false;
+        
+        int i = a.length() - 1;
+        int j = b.length() - 1;
+        
+        StringBuilder res = new StringBuilder(((i>j) ? i:j)+1);
+        
+        while(i>=0 || j>=0){
+            char charA = (i>=0)? a.charAt(i--):'0';
+            char charB = (j>=0)? b.charAt(j--):'0';
+            
+            if(charA == '1' && charB == '1'){
+                res = (carry) ? res.append('1'):res.append('0');
+                carry = true;
+            }
+            else if(charA == '0' && charB == '0'){
+                res = (carry) ? res.append('1') : res.append('0');
+                carry = false;
+            }
+            else{
+                res = (carry)? res.append('0') : res.append('1');
+            }
+        }
+        
+        if(carry)
+            res.append('1');
+        
+        return res.reverse().toString();
+    }
+}
