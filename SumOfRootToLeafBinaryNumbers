@@ -1,0 +1,13 @@
+class Solution {
+    public int sumRootToLeaf(TreeNode root) {
+        return pathSum(root, 0);
+    }
+    private int pathSum(TreeNode root, int parentNodeSum){
+        if(root == null)
+            return 0;
+        parentNodeSum = 2*parentNodeSum + root.val;
+        if(root.left==null && root.right == null)
+            return parentNodeSum;
+        return pathSum(root.left, parentNodeSum) + pathSum(root.right, parentNodeSum);
+    }
+}
