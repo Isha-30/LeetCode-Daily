@@ -1,0 +1,19 @@
+class Solution {
+    public int maxDistToClosest(int[] seats) {
+        int l = -1, len = seats.length, res = 0;
+        
+        for(int i = 0; i<len; i++){
+            if(seats[i]==1){
+                if(l == -1)
+                    res = i;
+                else
+                    res = Math.max(res, (i-l)/2);
+                
+                l = i;
+            }
+        }
+        if(seats[len-1]==0)
+            res = Math.max(res, len-1-l);
+        return res;
+    }
+}
