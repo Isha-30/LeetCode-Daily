@@ -1,0 +1,16 @@
+class Solution {
+    public char findTheDifference(String s, String t) {
+        char[] sc = s.toCharArray();
+        char[] tc = t.toCharArray();
+        
+        char c = 0;
+        
+        for(char ch: sc)
+            c ^= ch;
+        for(char ch : tc)
+            c ^= ch;
+        
+        return c;
+            
+    }
+}
