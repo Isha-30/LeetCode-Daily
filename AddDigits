@@ -1,0 +1,22 @@
+class Solution {
+    public int addDigits(int num) {
+        if(num/10 == 0)
+            return num;
+        
+        return sum(num);
+    }
+    
+    public int sum(int num){
+        int s = 0;
+        
+        while(num > 0){
+            s += num%10;
+            num = num / 10;
+        }
+        int r = s/10;
+        if(r!=0)
+            s = sum(s);
+        
+        return s;
+    }
+}
