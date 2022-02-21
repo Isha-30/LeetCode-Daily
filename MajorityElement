@@ -1,0 +1,14 @@
+class Solution {
+    public int majorityElement(int[] nums) {
+        int count = 0, presentMax = 0;
+        for(int num : nums){
+            if(count == 0)
+                presentMax = num;
+            if(presentMax != num)
+                count--;
+            else
+                count++;
+        }
+        return presentMax;
+    }
+}
