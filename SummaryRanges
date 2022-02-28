@@ -1,0 +1,29 @@
+class Solution {
+    public List<String> summaryRanges(int[] nums) {
+         int n = nums.length;
+         List<String> res = new ArrayList<>();
+        
+         if(n == 1){
+             res.add(nums[0] + "");
+             return res;
+         }
+        
+         int lower = 0, upper = 0;
+         for(int i = 0; i<n; i++){
+             while(i<n-1 && nums[i] + 1 == nums[i+1]){
+                 upper++;
+                 i++;
+             }
+             if(lower == upper){
+                 res.add(nums[lower]+"");
+             }
+             else{
+                 res.add(nums[lower]+"->"+nums[upper]);
+             }
+             upper++;
+             lower = upper;
+         }
+      return res;
+        
+    }
+}
