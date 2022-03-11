@@ -1,0 +1,34 @@
+class Solution {
+    public ListNode rotateRight(ListNode head, int k) {
+        ListNode last = head;
+        int length = 1;
+        
+        if (last != null) {
+			// Get last node and length of the list.
+            while (last.next != null) {
+                length++;
+                last = last.next;
+            }
+            
+			// Calculation to find first node index after rotation.
+            k %= length;
+            k = length - k;
+            
+            if (k > 0) {
+                ListNode first = head;
+				// This creates a cyclic linked list as the the last.next will point to head.
+                last.next = first;
+                
+				// Reach the node at index that was calculated a few steps ago.
+                while (--k > 0)
+                    first = first.next;
+                
+				// Re-assign head as first.next and then reassign first.next to null to break the cycle.
+                head = first.next;
+                first.next = null;
+            }
+        }
+        
+        return head;
+    }
+}
