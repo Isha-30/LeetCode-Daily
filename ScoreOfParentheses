@@ -1,0 +1,27 @@
+class Solution {
+    public int scoreOfParentheses(String S) {
+        
+        Stack<Character> stack = new Stack<>();
+        int res = 0, count = 0;
+        for(int i = 0; i < S.length(); ){         
+            if(S.charAt(i) == '(') {
+                if(!stack.isEmpty()){
+                    count *= 2;    
+                }else{
+                    count = 1;
+                }                
+                stack.push(S.charAt(i));
+                i++;
+            }else{
+                res += count;
+                while(i < S.length()&& S.charAt(i) == ')'){
+                   stack.pop();
+                   count /= 2; 
+                    i++;
+               }
+            }
+            
+        }
+        return res;
+    }
+}
