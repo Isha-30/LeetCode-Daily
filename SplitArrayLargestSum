@@ -1,0 +1,44 @@
+class Solution {
+    public int splitArray(int[] nums, int m) {
+        int lo = max(nums);  
+        int hi = sum(nums);
+        
+        while(lo<hi){
+            int mid = (lo+hi)/2;
+            if(splits(nums,mid)>m){
+                lo = mid+1;
+            }else{
+                hi = mid;
+            }
+        }
+        return lo;
+    }
+    
+    //split the array to nums.length subarrays
+    int max(int[]nums){
+        int max = Integer.MIN_VALUE;
+        for(int num:nums)max = Math.max(max,num);
+        return max;
+    }
+    
+    //split the array to one subarray with all elements.
+    int sum(int[]nums){
+        int sum = 0;
+        for(int num:nums)sum+=num;
+        return sum;
+    }
+    
+    //number of splits to satisfy each subarray is less then mid
+    private int splits(int[]nums,int mid) {
+        int sum = 0;
+        int splits = 1;
+        for (int num : nums) {
+            sum += num;
+            if (sum > mid) {
+                splits++;
+                sum = num;
+            }
+        }
+        return splits;
+    }
+}
