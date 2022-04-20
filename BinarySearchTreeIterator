@@ -14,7 +14,7 @@ class BSTIterator {
 	public boolean hasNext() {
 		return !stack.isEmpty();    
 	}
-	// -------------------
+	
 	public void updateStack(TreeNode node){
 		while(node != null){
 			stack.add(node);
