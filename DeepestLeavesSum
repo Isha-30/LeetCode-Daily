@@ -1,0 +1,16 @@
+class Solution {
+    private static int height(TreeNode root){
+        if(root == null) return 0;
+        else return Math.max(height(root.left), height(root.right))+1;
+    }
+    private static int helper(TreeNode root, int k){
+        if(root == null) return 0;
+        if(k==1) return(root.val);
+        else return helper(root.left, k-1) + helper(root.right, k-1);
+    }
+    public int deepestLeavesSum(TreeNode root) {
+        int k = height(root);
+        int ans = helper(root, k);
+        return ans;
+    }
+}
