@@ -1,0 +1,33 @@
+class Solution {
+    public int shortestPathBinaryMatrix(int[][] grid) {
+        int N = grid.length;
+        if (grid[0][0] != 0 || grid[N-1][N-1] != 0) {
+            return -1;
+        }
+        int len = 0;
+        Queue<int[]> q = new LinkedList<>();
+        q.add(new int[] {0, 0});
+        while (!q.isEmpty()) {
+            int size = q.size();
+            len++;
+            for (int i = 0; i < size; i++) {
+                int[] n = q.poll();
+                int r = n[0], c = n[1];
+                if (r == N-1 && c == N - 1) {
+                    return len;
+                }
+                for (int x = -1; x <= 1; x++) {
+                    for (int y = -1; y <= 1; y++) {
+                        int nr = r + x;
+                        int nc = c + y;
+                        if (nr >= 0 && nc >= 0 && nr < N && nc < N && grid[nr][nc] == 0) {
+                            grid[nr][nc] = 2;
+                            q.add(new int[] {nr, nc});
+                        }
+                    }
+                }
+            }
+        }
+        return -1;
+    }
+}
