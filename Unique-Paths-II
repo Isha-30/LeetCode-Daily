@@ -1,0 +1,28 @@
+class Solution {
+    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+        int row = obstacleGrid.length-1, col = obstacleGrid[0].length-1;
+        int[][] dp = new int[row+1][col+1];
+        for(int i = 0; i<=row; i++){
+            for(int j = 0; j<=col; j++){
+                dp[i][j] = -1;
+            }
+        }
+        return helper(0, 0, row, col, obstacleGrid, dp);
+    }
+    
+    private int helper(int i, int j, int r, int c, int[][] grid, int[][] dp){
+        //check bounds
+        if(i>r || j>c || grid[i][j] == 1)
+            return 0;
+        if(i==r && j==c)
+            return 1;
+        
+        //check if already in dp
+        if(dp[i][j]!=-1)
+            return dp[i][j];
+        else
+            dp[i][j] = helper(i+1, j, r, c, grid, dp)+helper(i, j+1, r, c, grid, dp);
+        
+        return dp[i][j];
+    }
+}
